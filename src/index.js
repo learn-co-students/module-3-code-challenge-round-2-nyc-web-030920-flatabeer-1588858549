@@ -43,10 +43,16 @@ document.addEventListener("DOMContentLoaded", function(event){
             form.addEventListener("click",function(event){
                 event.preventDefault()
                 const newDescription = event.target.value 
-                fetch("http://localhost:3000/beers/1")
-                .then()
-
-            
+                fetch("http://localhost:3000/beers/1",{
+                    method: "PATCH",
+                    headers: {"accept":"application/json",
+                                "content-type":"application/json"
+                            },
+                    body:JSON.stringify({description:newDescription})
+                })
+                .then(r=> r.json())
+                .then(getBeer)
+                  
             })
            
         })
@@ -60,6 +66,14 @@ document.addEventListener("DOMContentLoaded", function(event){
             ul.append(li)
         }  
     }
+    
+    ul = document.querySelector(".reviews")
+    document.addEventListener("submit",function(e){
+        debugger
+    //ran out of time to finish 
+        
+    })
+ 
 
 
 })
