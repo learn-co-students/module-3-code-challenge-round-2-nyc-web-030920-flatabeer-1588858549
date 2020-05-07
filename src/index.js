@@ -4,8 +4,11 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     fetchBeer()
     const oneDescription = document.getElementsByClassName('description')[0]
-
-   const beerDetail = document.getElementsByClassName('beer-details')
+    const ul = document.getElementsByClassName('reviews')[0]
+   const beerDetail = document.getElementsByClassName('beer-details')[0]
+   const reviewForm = document.getElementsByClassName('review-form')[0]
+   const button = document.getElementsByTagName('button')[0]
+//    const li = document.getElementsByTagName('li')[0]
 
     function fetchBeer(){
         fetch('http://localhost:3000/beers/1')
@@ -21,9 +24,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
        const oneImage = document.getElementsByTagName('img')[0]
            oneImage.src = firstBeer.image_url
 
-           oneDescription.textContent  = firstBeer.description
-           
+           firstBeer.reviews.forEach(review =>{
+              const li = document.createElement('li')
+              li.innerText = review 
+            ul.append(li)
+           })
+
+
+
+
+        //    firstBeer.description
+
+
+        //    oneDescription.addEventListener('submit', writeDescription)
+
+        
+
+           reviewForm.addEventListener('submit', addReview)
     }
+
+    function addReview(event){
+        event.preventDefault()
+       
+        const newLi = document.createElement('li')
+
+        newLi.innerText = reviewForm.textContent.submit
+
+        ul.append(newLi)
+
+    }
+    
+
+//    function writeDescription(event){
+//        event.preventDefault()
+//        oneDescription.textContent = value 
+//         }
 
 
 })
