@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     getData()
     updateDescription()
     addReview()
-    let id = 1
+    
     function getData() {
+        let id = 1
         fetch(`http://localhost:3000/beers/${id}`)
         .then(response => response.json())
         .then(data => displayData(data))
@@ -34,9 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     function updateDescription() {
+        let id = 1
+
         let descriptionForm = document.getElementsByClassName('description')[0]
         let descriptionArea = descriptionForm.getElementsByTagName('textarea')[0]
-        descriptionForm.addEventListener('submit', function () {
+        descriptionForm.addEventListener('submit', function (event) {
+            event.preventDefault()
             let newDescription = descriptionArea.value
             fetch(`http://localhost:3000/beers/${id}`, {
                 method: 'PATCH',
@@ -50,6 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
     function addReview() {
-        
+        let reviewForm = document.getElementsByClassName('review-form')[0]
+        let reviewText = reviewForm.getElementsByTagName('textarea')[0]
+        reviewForm.addEventListener('submit', function (event) {
+            event.preventDefault()
+            let reviewList = document.getElementsByClassName('reviews')[0]
+            let reviewEle = document.createElement('li')
+            reviewEle.innerText = reviewText.value
+            reviewList.appendChild(reviewEle)
+            console.log(reviewText)
+        })
     }
 })
