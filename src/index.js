@@ -1,9 +1,10 @@
 // Code here
 // √make fetch request to beers
 // √render beers/1
-// send PATCH fetch request to beers/1 to update description
-// edit dom to display updated description
-// edit dom to display new review (no persistence required)
+// √send PATCH fetch request to beers/1 to update description
+// √edit dom to display updated description
+// √edit dom to display new review (no persistence required)
+// √persist added review
 document.addEventListener("DOMContentLoaded", event => {
     const firstBeer= 'http://localhost:3000/beers/1'
     function getBeer(){
@@ -63,10 +64,26 @@ document.addEventListener("DOMContentLoaded", event => {
         e.preventDefault()
         review = document.getElementById('review-text').value
         let reviewUl = document.getElementsByClassName('reviews')[0]
-        console.log(reviewUl)
         reviewLi = document.createElement('li')
         reviewLi.innerText = review
         reviewUl.append(reviewLi)
+        reviewArray = Array.from(reviewUl.getElementsByTagName('li'))
+        console.log(reviewUl.getElementsByTagName('li')[0].innerText)
+        newArray = []
+        reviewArray.forEach(review => {
+            newArray.push(review.innerText)
+            console.log(newArray)
+        })
+        fetch(firstBeer, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body:JSON.stringify({
+                "reviews": newArray
+            })
+        })
 
     })
     getBeer()
