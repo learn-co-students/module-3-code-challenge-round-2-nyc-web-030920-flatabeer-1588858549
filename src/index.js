@@ -3,24 +3,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let desc = beerDetails.querySelector('.description')
     let form = document.querySelector('.review-form')
 
-    fetch(`http://localhost:3000/beers/1`)
+    function getBeer(){
+        fetch(`http://localhost:3000/beers/1`)
         .then(response => response.json())
         .then(beer => createBeer(beer))
+    }
 
     function createBeer(beer) {
         let beerDetails = document.querySelector('.beer-details')
         let desc = beerDetails.querySelector('.description')
         let form = document.querySelector('.review-form')
 
-        title = beerDetails.querySelector('h2')
-        picture = beerDetails.querySelector('img')
-        descText = desc.querySelector('textarea')
+        let title = beerDetails.querySelector('h2')
+        let picture = beerDetails.querySelector('img')
+        let descText = desc.querySelector('textarea')
         reviews = form.querySelector('textarea')
 
         title.innerText = beer.name
         picture.src = beer.image_url
         descText.innerText = beer.description
         reviews.innerText = beer.reviews
+        neverchange
 
     }
 
@@ -41,19 +44,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     "accept": "application/json"
                 },
                 body: JSON.stringify({
-                    description: descText.value 
+                    description: descText.value
                 })
             })
                 .then(res => res.json())
         }
     })
 
-    form.addEventListener('submit',(event) => {
+
+    form.addEventListener('submit', (event) => {
         event.preventDefault
-        console.log('meow')
+        formText = event.target.querySelector('textarea')
+        newText = formText.value
+        formText.innerText = newText
+
+        fetch(`http://localhost:3000/beers/1`, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json",
+                "accept": "application/json"
+            },
+            body: JSON.stringify({
+                reviews: newText
+            })
+        })
+            .then(res => res.json())
+
+
+        
+
     })
 
 
 
-
+getBeer()
 })
