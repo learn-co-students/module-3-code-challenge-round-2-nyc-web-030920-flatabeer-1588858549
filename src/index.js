@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let descText = desc.querySelector('textarea')
         reviews = form.querySelector('textarea')
 
+
+
         title.innerText = beer.name
         picture.src = beer.image_url
         descText.innerText = beer.description
@@ -60,7 +62,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         newText = formText.value
         formText.innerText = newText
         
-
+// just realized at 11:15 there was a customer Reviews section
+// I set the reviews to the text box 
         fetch(`http://localhost:3000/beers/1`, {
             method: "PATCH",
             headers: {
