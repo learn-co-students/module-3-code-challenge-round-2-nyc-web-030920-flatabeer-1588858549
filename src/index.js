@@ -83,10 +83,14 @@ function leaveReview(){
            let reviewUL = document.querySelector('.reviews')
            reviewUL.append(newReviewLi)
 
+           reviewOBJ = {
+               reviews: newReviewLi.innerText
+           }
+
            fetch(`${beersURL}/${id}`, {
                method: "POST",
                headers: headers,
-               body: JSON.stringify({reviews: newReviewLi})
+               body: JSON.stringify(reviewOBJ)
            })
        }
     })
