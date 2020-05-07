@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  
     getData()
     updateDescription()
     addReview()
@@ -56,31 +57,32 @@ document.addEventListener('DOMContentLoaded', function () {
         
         reviewForm.addEventListener('submit', function (event) {
             event.preventDefault()           
-            let reviewListEle = document.getElementsByClassName('reviews')[0]
-            let reviewListCollection = reviewListEle.getElementsByTagName('li')
-            console.log(reviewListCollection.length)
-        let reviewsArray = []
-        for (var i = 0, len = reviewListCollection.length; i < len; i++ ) {
-            reviewsArray.push(reviewListCollection[i].innerText)
-        }
-        console.log(reviewsArray)
+            // let reviewListEle = document.getElementsByClassName('reviews')[0]
+            // let reviewListCollection = reviewListEle.getElementsByTagName('li')
+            // console.log(reviewListCollection.length)
+            // let reviewsArray = []
+            // for (var i = 0, len = reviewListCollection.length; i < len; i++ ) {
+            // reviewsArray.push(reviewListCollection[i].innerText)
+            // }
+            // console.log(reviewsArray)
 
-            // let reviewList = document.getElementsByClassName('reviews')[0]
-            // let reviewEle = document.createElement('li')
-            // reviewEle.innerText = reviewText.value
-            // reviewList.appendChild(reviewEle)
-            // console.log(reviewText)
-            let id = 1
-            reviewsArray.push(reviewText.value)
-            fetch(`http://localhost:3000/beers/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accepts": "application/json"
-                },
-                body: JSON.stringify({reviews: reviewsArray})
-            })
-            .then(getData())
+            let reviewList = document.getElementsByClassName('reviews')[0]
+            let reviewEle = document.createElement('li')
+            reviewEle.innerText = reviewText.value
+            reviewList.appendChild(reviewEle)
+            console.log(reviewText)
+            reviewForm.reset()
+            // let id = 1
+            // reviewsArray.push(reviewText.value)
+            // fetch(`http://localhost:3000/beers/${id}`, {
+            //     method: 'PATCH',
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Accepts": "application/json"
+            //     },
+            //     body: JSON.stringify({reviews: reviewsArray})
+            // })
+            // .then(getData())
         })
     }
 })
