@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         picture.src = beer.image_url
         descText.innerText = beer.description
         reviews.innerText = beer.reviews
-        neverchange
+        
 
     }
 
@@ -55,8 +55,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', (event) => {
         event.preventDefault
         formText = event.target.querySelector('textarea')
+        oldReviews = formText.innerHTML
+        
         newText = formText.value
         formText.innerText = newText
+        
 
         fetch(`http://localhost:3000/beers/1`, {
             method: "PATCH",
@@ -65,7 +68,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 "accept": "application/json"
             },
             body: JSON.stringify({
-                reviews: newText
+                reviews: newText 
             })
         })
             .then(res => res.json())
