@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', function (){
 
     getBeer();
-  
+  addBeerReview();
 
 })
 
@@ -39,20 +39,36 @@ form.addEventListener('submit', function () {
 })
 
 
-function updateBeerDescription(data) {
-    fetch("http://localhost:3000/beers/1") , {
-        mehthod: "PATCH",
-        body: {
-            description: data
-        }
-    })
-    .then(resp => resp.json())
-    .then(data => setUpBeer(data.description))
-}
+// function updateBeerDescription(data) {
+//     fetch("http://localhost:3000/beers/1") , {
+//         mehthod: "PATCH",
+//         headers:
+//         {
+//             "Content- Type": "application/json",
+//             Accept: "application/json"
+//         },
+//         body: JSON.stringify({
+//             dscription: data
+//         })
+//     })
+//     .then(resp => resp.json())
+//     .then(data => setUpBeer(data.description))
+// }
 
-fucntion setUpBeer(description) {
-    const beerDetail = document.getElementsByTagName('textarea')[0]
-    if (beerDetail){
-        beerDetail.innerHTML = description
+// fucntion setUpBeer(description) {
+//     const beerDetail = document.getElementsByTagName('textarea')[0]
+//     if (beerDetail){
+//         beerDetail.innerHTML = description
+//     }
+// }
+
+function addBeerReview() {
+    const inputData = document.getElementsByTagName('textarea')[1].value;
+    console.log(inputData)
+    const reviewList = document.getElementsByClassName('reviews')[0];
+    if (inputData) {
+      const newReview = document.createElement('li');
+      newReview.innerText = inputData;
+      reviewList.appendChild(newReview);
     }
-}
+  }
