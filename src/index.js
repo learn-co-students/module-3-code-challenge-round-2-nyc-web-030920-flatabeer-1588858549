@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", event => {
                 "reviews": newArray
             })
         })
-
     })
     getBeer()
 })
