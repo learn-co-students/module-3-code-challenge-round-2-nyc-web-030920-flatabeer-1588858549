@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", event => {
         <img src="${beer.image_url}">
 
         <form class="description">
-          <textarea>${beer.description}</textarea>
+          <textarea id="description-text">${beer.description}</textarea>
           <button class="update">Update Beer</button>
         </form>
 
         <h3>Leave a Review</h3>
         <form class="review-form">
-          <textarea id="description-text"></textarea>
+          <textarea id="review-text"></textarea>
           <input type="submit" value="Submit">
         </form>
 
@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", event => {
         </ul>`
     let reviewUl = document.getElementsByClassName('reviews')
     reviewUl[0].innerHTML = ""
-    console.log(reviewUl[0])
     beer.reviews.forEach(review => {
         li = document.createElement('li')
         li.innerText = review
@@ -45,10 +44,7 @@ document.addEventListener("DOMContentLoaded", event => {
     document.addEventListener('click', e => {
         if (e.target.className === 'update'){
             e.preventDefault()
-            form = document.querySelector('.description')
-            console.log(form)
-            // console.log(e.target.previousElementSibling.innerHTML)
-            // newDescription = e.target.previousElementSibling.innerHTML
+            description = document.getElementById('description-text')
             fetch(firstBeer, {
                 method: "PATCH",
                 headers: {
@@ -56,12 +52,22 @@ document.addEventListener("DOMContentLoaded", event => {
                     "Accept": "application/json"
                 },
                 body:JSON.stringify({
-                    "description": e.target.previousElementSibling.innerHTML
+                    "description": description.value
                 })
             })
 
         }
     })
 
+    document.addEventListener('submit', e => {
+        e.preventDefault()
+        review = document.getElementById('review-text').value
+        let reviewUl = document.getElementsByClassName('reviews')[0]
+        console.log(reviewUl)
+        reviewLi = document.createElement('li')
+        reviewLi.innerText = review
+        reviewUl.append(reviewLi)
+
+    })
     getBeer()
 })
