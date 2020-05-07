@@ -1,5 +1,7 @@
 const endPoint = `http://localhost:3000/beers/1`
-const updateBeer = document.
+const form = document.getElementsByClassName('description')
+console.log(form[0].textContent)
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
@@ -7,6 +9,26 @@ renderBeer()
 
 
 
+    document.addEventListener('click', (e)=>{
+
+        if(e.target.textContent === 'Update Beer'){
+            e.preventDefault()
+            console.log(e.target)
+            // fetch(endPoint, {
+            //     method: 'PATCH',
+            //     headers:
+            //     {
+            //         'content-type': 'application/json',
+            //         'accept': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         description
+            //     })
+            // })
+        }
+
+
+    })
 
 
 })
