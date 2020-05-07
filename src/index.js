@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
    const button = document.getElementsByTagName('button')[0]
 //    const li = document.getElementsByTagName('li')[0]
 const descText = document.getElementsByTagName('textarea')[0]
-console.log(descText)
+
     function fetchBeer(){
         fetch('http://localhost:3000/beers/1')
         .then(r => r.json())
@@ -57,8 +57,10 @@ console.log(descText)
        fetch('http://localhost:3000/beers/1')
        .then(r => r.json())
         .then(data => {
-            data.description = oneDescription.textContent
-            console.log(oneDescription.descTextarea)
+            descText.value = data.description
+            
+            data.description = descText.value
+                 
         })
         }
 
