@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", event => {
         fetch(firstBeer)
         .then(resp => resp.json())
         .then(beer => renderBeer(beer))
-    }
+    } //closes getBeer function
     function renderBeer(beer){
         const details = document.querySelector(".beer-details")
         details.innerHTML = 
@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", event => {
         li = document.createElement('li')
         li.innerText = review
         reviewUl[0].append(li)        
-    })
-    }
+    }) //closes review forEach loop
+    } //closes render beer
     document.addEventListener('click', e => {
         if (e.target.className === 'update'){
             e.preventDefault()
@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", event => {
                 },
                 body:JSON.stringify({
                     "description": description.value
-                })
-            })
+                }) //closes body
+            }) //closes fetch
 
-        }
-    })
+        } //closes if statement
+    }) //closes click listener
 
     document.addEventListener('submit', e => {
         e.preventDefault()
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", event => {
         reviewArray.forEach(review => {
             newArray.push(review.innerText)
             console.log(newArray)
-        })
+        }) //closes array foreach loop
         fetch(firstBeer, {
             method: "PATCH",
             headers: {
@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", event => {
             },
             body:JSON.stringify({
                 "reviews": newArray
-            })
-        })
-    })
+            }) //closes body
+        }) //closes fetch
+    }) //closes submit listener
     getBeer()
-})
+}) //closes domcontent
