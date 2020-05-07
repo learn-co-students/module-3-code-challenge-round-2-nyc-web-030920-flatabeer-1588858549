@@ -2,6 +2,7 @@ const endPoint = `http://localhost:3000/beers/1`
 
 
 
+
 document.addEventListener('DOMContentLoaded', ()=>{
 
 renderBeer()
@@ -14,10 +15,24 @@ renderBeer()
             e.preventDefault()
             updateDes()   
             console.log('Saved')
+        }else if(e.target.value === 'Submit'){
+            // console.log('Hi')
+            e.preventDefault()
+            let reviewForm = document.getElementsByClassName('review-form')[0]
+            // console.log(reviewForm[0].value)
+            // debugger
+            let li = document.createElement('li')
+            li.textContent= reviewForm[0].value
+            
+            let ul = document.getElementsByClassName('reviews')[0]
+            // console.log(ul)
+            ul.appendChild(li)
+
         }
 
-
     })
+
+
 
 
 })
@@ -53,20 +68,20 @@ function seeBeer(beer){
 function updateDes(){
     let form = document.getElementsByClassName('description')
     console.log(form[0].textContent)
-//     let description = form[0].textContent
-//     // console.log(description)
+    let description = form[0].textContent
+    // console.log(description)
 
-//     fetch(endPoint, {
-//         method: 'PATCH',
-//         headers:
-//         {
-//             'content-type': 'application/json',
-//             'accept': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             description
-//         })
-//     })
+    fetch(endPoint, {
+        method: 'PATCH',
+        headers:
+        {
+            'content-type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
+            description
+        })
+    })
   
 
 }
