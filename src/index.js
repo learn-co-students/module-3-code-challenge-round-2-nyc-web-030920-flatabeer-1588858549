@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
    const reviewForm = document.getElementsByClassName('review-form')[0]
    const button = document.getElementsByTagName('button')[0]
 //    const li = document.getElementsByTagName('li')[0]
-
+const descText = document.getElementsByTagName('textarea')[0]
+console.log(descText)
     function fetchBeer(){
         fetch('http://localhost:3000/beers/1')
         .then(r => r.json())
@@ -30,15 +31,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ul.append(li)
            })
 
+          
+           
 
 
-
-        //    firstBeer.description
-
-
-        //    oneDescription.addEventListener('submit', writeDescription)
-
-        
+           oneDescription.addEventListener('submit', writeDescription)
 
            reviewForm.addEventListener('submit', addReview)
     }
@@ -48,17 +45,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
        
         const newLi = document.createElement('li')
 
-        newLi.innerText = reviewForm.textContent.submit
-
+        reviewForm.textContent.value = newLi.innerText
         ul.append(newLi)
 
     }
     
 
-//    function writeDescription(event){
-//        event.preventDefault()
-//        oneDescription.textContent = value 
-//         }
+   function writeDescription(event){
+       event.preventDefault()
+    
+       fetch('http://localhost:3000/beers/1')
+       .then(r => r.json())
+        .then(data => {
+            data.description = oneDescription.textContent
+            console.log(oneDescription.descTextarea)
+        })
+        }
 
 
 })
