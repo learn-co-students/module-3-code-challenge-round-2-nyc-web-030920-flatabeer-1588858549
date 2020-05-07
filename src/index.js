@@ -1,10 +1,9 @@
-// Code here
-const beerForm = document.getElementsByClassName("description")[0]
+
 
 document.addEventListener('DOMContentLoaded', function (){
 
     getBeer();
-    beerForm.addEventListener('click', addBeer)
+  
 
 })
 
@@ -33,5 +32,21 @@ function addBeer(beer){
     beerReviewList.append(beerReviewThree, beerReviewFour)
 }
 
+const beerForm = document.getElementsByClassName("description")[0].children[1]
+beerForm.addEventListener('click', function (e) {
+e.preventDefault()
+let description = e.target.description.value 
+    const inputData = document.getElementsByClassName("description")[0].children[0].value
+    updateBeerDescription(inputData);
+})
 
-
+function updateBeerDescription(inputData) {
+    fetch("http://localhost:3000/beers/1") , {
+        method: 'PATCH',
+        body: {
+            description: inputData
+        }
+    })
+    .then(resp => resp.json())
+    .then(data =>updateBeeretail)
+}
