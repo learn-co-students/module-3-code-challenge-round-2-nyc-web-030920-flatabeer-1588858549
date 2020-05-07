@@ -1,8 +1,11 @@
 // Code here
+const beerForm = document.getElementsByClassName("description")[0]
 
 document.addEventListener('DOMContentLoaded', function (){
 
     getBeer();
+    beerForm.addEventListener('click', addBeer)
+
 })
 
 function getBeer() {
@@ -22,5 +25,13 @@ function addBeer(beer){
     const beerReviewTwo = document.getElementsByClassName("reviews")[0].children[1]
     beerReview.innerText = `${beer.reviews[0]}`
     beerReviewTwo.innerText = `${beer.reviews[1]}`
-
+    const beerReviewThree = document.createElement('li')
+    beerReviewThree.innerText = `${beer.reviews[2]}`
+    const beerReviewFour = document.createElement('li')
+    beerReviewFour.innerText = `${beer.reviews[3]}`
+    const beerReviewList = document.getElementsByClassName("reviews")[0]
+    beerReviewList.append(beerReviewThree, beerReviewFour)
 }
+
+
+
