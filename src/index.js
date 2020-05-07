@@ -45,7 +45,7 @@ const descText = document.getElementsByTagName('textarea')[0]
        
         const newLi = document.createElement('li')
 
-        reviewForm.textContent.value = newLi.innerText
+         newLi.innerText = reviewForm.textContent.value
         ul.append(newLi)
 
     }
