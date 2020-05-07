@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
         <h3>Leave a Review</h3>
         <form class="review-form">
-          <textarea></textarea>
+          <textarea id="description-text"></textarea>
           <input type="submit" value="Submit">
         </form>
 
@@ -37,12 +37,31 @@ document.addEventListener("DOMContentLoaded", event => {
     reviewUl[0].innerHTML = ""
     console.log(reviewUl[0])
     beer.reviews.forEach(review => {
-        console.log(review)
         li = document.createElement('li')
         li.innerText = review
         reviewUl[0].append(li)        
     })
     }
+    document.addEventListener('click', e => {
+        if (e.target.className === 'update'){
+            e.preventDefault()
+            form = document.querySelector('.description')
+            console.log(form)
+            // console.log(e.target.previousElementSibling.innerHTML)
+            // newDescription = e.target.previousElementSibling.innerHTML
+            fetch(firstBeer, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body:JSON.stringify({
+                    "description": e.target.previousElementSibling.innerHTML
+                })
+            })
+
+        }
+    })
 
     getBeer()
 })
