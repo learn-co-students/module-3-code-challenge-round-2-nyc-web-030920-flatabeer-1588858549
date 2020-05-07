@@ -32,21 +32,27 @@ function addBeer(beer){
     beerReviewList.append(beerReviewThree, beerReviewFour)
 }
 
-const beerForm = document.getElementsByClassName("description")[0].children[1]
-beerForm.addEventListener('click', function (e) {
-e.preventDefault()
-let description = e.target.description.value 
-    const inputData = document.getElementsByClassName("description")[0].children[0].value
-    updateBeerDescription(inputData);
+const form = document.getElementsByClassName('description')[0];
+form.addEventListener('submit', function () {
+    const inputDat = document.getElementsByTagName('textarea')[0].value
+    updateBeerDescription(inputData)
 })
 
-function updateBeerDescription(inputData) {
+
+function updateBeerDescription(data) {
     fetch("http://localhost:3000/beers/1") , {
-        method: 'PATCH',
+        mehthod: "PATCH",
         body: {
-            description: inputData
+            description: data
         }
     })
     .then(resp => resp.json())
-    .then(data =>updateBeeretail)
+    .then(data => setUpBeer(data.description))
+}
+
+fucntion setUpBeer(description) {
+    const beerDetail = document.getElementsByTagName('textarea')[0]
+    if (beerDetail){
+        beerDetail.innerHTML = description
+    }
 }
