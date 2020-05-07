@@ -1,6 +1,5 @@
 const endPoint = `http://localhost:3000/beers/1`
-const form = document.getElementsByClassName('description')
-console.log(form[0].textContent)
+
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -13,18 +12,8 @@ renderBeer()
 
         if(e.target.textContent === 'Update Beer'){
             e.preventDefault()
-            console.log(e.target)
-            // fetch(endPoint, {
-            //     method: 'PATCH',
-            //     headers:
-            //     {
-            //         'content-type': 'application/json',
-            //         'accept': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         description
-            //     })
-            // })
+            updateDes()   
+            console.log('Saved')
         }
 
 
@@ -58,5 +47,26 @@ function seeBeer(beer){
     beerReview[0].textContent = beer.reviews[0]
     beerReview[1].textContent = beer.reviews[1]
     
+
+}
+
+function updateDes(){
+    let form = document.getElementsByClassName('description')
+    console.log(form[0].textContent)
+//     let description = form[0].textContent
+//     // console.log(description)
+
+//     fetch(endPoint, {
+//         method: 'PATCH',
+//         headers:
+//         {
+//             'content-type': 'application/json',
+//             'accept': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             description
+//         })
+//     })
+  
 
 }
